@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv=”X-UA-Compatible” content=”IE=edge,chrome=1″/>
+
+	<title>管理后台</title>
+	<link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/reset.css"/>
+	<link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/icheck.css"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="./js/html5shiv.js"></script>
+    <script src="./js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+
+    </style>
+
+</head>
+<body>
+<div class="content-panel">
+    <div class="page-header">
+        <h4>表格</h4>
+    </div>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>
+                <input type="checkbox" class="allCheck">
+            </th>
+            <th>Column name</th>
+            <th>Column name</th>
+            <th>Column name</th>
+            <th>Column name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="checkbox" value="001"  class="check"></td>
+            <td>Row 1</td>
+            <td>Row 2</td>
+            <td>Row 3</td>
+            <td>Row 4</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" value="002" class="check"></td>
+            <td>Row 1</td>
+            <td>Row 2</td>
+            <td>Row 3</td>
+            <td>Row 4</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" value="003" class="check"></td>
+            <td>Row 1</td>
+            <td>Row 2</td>
+            <td>Row 3</td>
+            <td>Row 4</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" value="004" class="check"></td>
+            <td>Row 1</td>
+            <td>Row 2</td>
+            <td>Row 3</td>
+            <td>Row 4</td>
+        </tr>
+        
+        </tbody>
+    </table>
+    <div class="table-page">
+        <ul class="pagination">
+            <li class="disabled"><a href="#">首页</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#"  id="btn">末页</a></li>
+        </ul>
+    </div>
+</div>
+<script src="./js/jquery-1.9.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/icheck.min.js"></script>
+<script>
+
+    $(document).ready(function(){
+        var oCheck = $('.check');
+        var allCheck = $('.allCheck');
+        //全选框选中状态下
+        allCheck.on('ifChecked',function(){
+            oCheck.iCheck('check');  //设置下面checkbox 全部选中
+        });
+        //全选框未选中状态下
+        allCheck.on('ifClicked',function(){
+            oCheck.iCheck('uncheck'); //设置下面checkbox 全部取消选中
+        });
+        //点击取消checkbox选中状态 ，取消全选框选中状态
+        oCheck.on('ifUnchecked',function(){
+            allCheck.iCheck('uncheck'); //取消全选框选中状态
+        });
+        //选中checkbox，如果选中总数 == checkbox 总数 ，选中全选框；
+        /*
+         * @todo oChecked.length 选中总数
+         * @todo oCheck.length checkbox 总数
+         */
+        oCheck.on('ifChecked',function(){
+            var oChecked = $('.check:checked');
+            if(oChecked.length == oCheck.length){
+                allCheck.iCheck('check');
+            }
+        });
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_futurico',
+            radioClass: 'iradio_futurico',
+            increaseArea: '20%' // optional
+        });
+        //获取checkbox 选中的值
+        var btn = $('#btn');
+        btn.click(function(){
+            var arr = [];
+            oCheck.each(function(){
+                if(this.checked){
+                    arr.push($(this).val());
+                }
+            })
+            var str = arr.toString();
+
+        })
+    });
+</script>
+</body>
+</html>
